@@ -1,0 +1,291 @@
+/*
+ * 奇绩前沿信号 - 主交互脚本
+ * 提供基础交互功能：占位链接提示、平滑滚动、移动端优化
+ */
+
+// DOM 加载完成后执行
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('🚀 奇绩前沿信号网站加载完成');
+
+    // 初始化所有功能
+    initComingSoonNotification();
+    initSmoothScrolling();
+    initMobileOptimizations();
+    initAnalytics();
+});
+
+/**
+ * 占位链接提示功能
+ * 为标记为"即将开放"的产品显示提示
+ */
+function initComingSoonNotification() {
+    const comingSoonCards = document.querySelectorAll('.product-card[data-status="coming-soon"]');
+
+    comingSoonCards.forEach(card => {
+        card.addEventListener('click', function(e) {
+            e.preventDefault();
+            showComingSoonNotification(this);
+        });
+    });
+}
+
+/**
+ * 显示"即将开放"通知
+ * @param {Element} card - 被点击的产品卡片
+ */
+function showComingSoonNotification(card) {
+    const title = card.querySelector('.product-title').textContent;
+
+    // 创建通知元素
+    const notification = document.createElement('div');
+    notification.className = 'coming-soon-notification';
+    notification.innerHTML = `
+        <div class="notification-content">
+            <div class="notification-icon">🚀</div>
+            <h4 class="notification-title">${title}</h4>
+            <p class="notification-message">即将开放，敬请期待</p>
+            <button class="notification-close">确定</button>
+        </div>
+    `;
+
+    // 添加样式
+    notification.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    `;
+
+    const content = notification.querySelector('.notification-content');
+    content.style.cssText = `
+        background-color: #FFFFFF;
+        border-radius: 12px;
+        padding: 32px;
+        text-align: center;
+        max-width: 400px;
+        margin: 20px;
+        transform: scale(0.9);
+        transition: transform 0.3s ease;
+    `;
+
+    const icon = notification.querySelector('.notification-icon');
+    icon.style.cssText = `
+        font-size: 48px;
+        margin-bottom: 16px;
+    `;
+
+    const notificationTitle = notification.querySelector('.notification-title');
+    notificationTitle.style.cssText = `
+        font-size: 20px;
+        font-weight: 600;
+        color: #1A1A1A;
+        margin: 0 0 8px 0;
+    `;
+
+    const message = notification.querySelector('.notification-message');
+    message.style.cssText = `
+        font-size: 16px;
+        color: #555555;
+        margin: 0 0 24px 0;
+    `;
+
+    const closeBtn = notification.querySelector('.notification-close');
+    closeBtn.style.cssText = `
+        background-color: #0052FF;
+        color: #FFFFFF;
+        border: none;
+        border-radius: 6px;
+        padding: 10px 24px;
+        font-size: 16px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+    `;
+
+    // 添加到页面
+    document.body.appendChild(notification);
+
+    // 动画显示
+    requestAnimationFrame(() => {
+        notification.style.opacity = '1';
+        content.style.transform = 'scale(1)';
+    });
+
+    // 关闭功能
+    const closeNotification = () => {
+        notification.style.opacity = '0';
+        content.style.transform = 'scale(0.9)';
+        setTimeout(() => {
+            document.body.removeChild(notification);
+        }, 300);
+    };
+
+    closeBtn.addEventListener('click', closeNotification);
+    notification.addEventListener('click', function(e) {
+        if (e.target === notification) {
+            closeNotification();
+        }
+    });
+
+    // 按 ESC 关闭
+    const escHandler = (e) => {
+        if (e.key === 'Escape') {
+            closeNotification();
+            document.removeEventListener('keydown', escHandler);
+        }
+    };
+    document.addEventListener('keydown', escHandler);
+
+    // 鼠标悬停效果
+    closeBtn.addEventListener('mouseenter', () => {
+        closeBtn.style.backgroundColor = '#0041CC';
+    });
+    closeBtn.addEventListener('mouseleave', () => {
+        closeBtn.style.backgroundColor = '#0052FF';
+    });
+}
+
+/**
+ * 初始化平滑滚动
+ */
+function initSmoothScrolling() {
+    // 为所有内部锚点链接添加平滑滚动
+    const anchorLinks = document.querySelectorAll('a[href^="#"]');
+
+    anchorLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+}
+
+/**
+ * 移动端优化
+ */
+function initMobileOptimizations() {
+    // 防止移动端双击缩放（保持页面缩放功能）
+    let lastTouchTime = 0;
+
+    document.addEventListener('touchstart', function(e) {
+        const now = Date.now();
+        const timeSince = now - lastTouchTime;
+
+        if (timeSince < 500 && timeSince > 0) {
+            // 双击行为，但不阻止，让浏览器处理
+            const target = e.target.closest('.product-card');
+            if (target && target.hasAttribute('data-status')) {
+                e.preventDefault();
+                target.click();
+            }
+        }
+
+        lastTouchTime = now;
+    });
+
+    // 移动端横屏检测
+    window.addEventListener('orientationchange', function() {
+        // 延迟执行以确保视口更新
+        setTimeout(() => {
+            window.scrollTo(0, 0);
+        }, 500);
+    });
+}
+
+/**
+ * 简单的访问统计（可选）
+ */
+function initAnalytics() {
+    // 记录页面访问
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    console.log(`📊 访问页面: ${currentPage}`);
+
+    // 记录页面停留时间
+    let startTime = Date.now();
+
+    window.addEventListener('beforeunload', function() {
+        const duration = Math.round((Date.now() - startTime) / 1000);
+        console.log(`⏱️ 页面停留时间: ${duration}秒`);
+    });
+
+    // 记录用户交互
+    document.addEventListener('click', function(e) {
+        const target = e.target;
+        let elementInfo = target.tagName.toLowerCase();
+
+        if (target.className) {
+            elementInfo += `.${target.className.split(' ')[0]}`;
+        }
+
+        if (target.id) {
+            elementInfo += `#${target.id}`;
+        }
+
+        console.log(`🔗 用户点击: ${elementInfo}`);
+    });
+}
+
+/**
+ * 工具函数：判断是否为移动设备
+ */
+function isMobile() {
+    return window.innerWidth <= 768 || /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+
+/**
+ * 工具函数：节流
+ * @param {Function} func - 要节流的函数
+ * @param {number} wait - 等待时间（毫秒）
+ */
+function throttle(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+/**
+ * 工具函数：防抖
+ * @param {Function} func - 要防抖的函数
+ * @param {number} wait - 等待时间（毫秒）
+ */
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+// 导出函数（如果需要在其他脚本中使用）
+window.MiraclePlusSignal = {
+    isMobile,
+    throttle,
+    debounce,
+    showComingSoonNotification
+};

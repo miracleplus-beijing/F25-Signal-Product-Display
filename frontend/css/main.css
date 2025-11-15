@@ -1,0 +1,333 @@
+/* ===================================================================
+   奇绩前沿信号 - 主样式文件
+   遵循 CLAUDE.md 设计规范：信息减法、视觉聚焦、模块化、规则化、极简
+   =================================================================== */
+
+/* ===== CSS 变量定义 ===== */
+:root {
+  /* 颜色系统 - 增强蓝色方案 */
+  --primary-bg: #FFFFFF;
+  --primary-text: #1A1A1A;
+  --secondary-text: #555555;
+
+  /* 奇绩蓝色系 */
+  --accent-color: #0052FF;          /* 主蓝色 - 奇绩蓝 */
+  --accent-dark: #0041CC;           /* 深蓝色 - 悬停/强调 */
+  --accent-light: #3377FF;          /* 亮蓝色 - 交互反馈 */
+  --blue-bg-light: #F0F5FF;         /* 极浅蓝背景 */
+  --blue-bg-medium: #E6F0FF;        /* 浅蓝背景 */
+  --blue-text: #0052FF;             /* 蓝色文字 */
+
+  --border-light: #E0E0E0;
+  --border-blue: #B3D1FF;           /* 蓝色边框 */
+  --hover-bg: #F0F5FF;              /* 悬停背景改为浅蓝 */
+
+  /* 间距系统 */
+  --spacing-xs: 8px;
+  --spacing-sm: 16px;
+  --spacing-md: 24px;
+  --spacing-lg: 32px;
+  --spacing-xl: 48px;
+  --spacing-xxl: 64px;
+
+  /* 字体系统 */
+  --font-family: "PingFang SC", "Helvetica Neue", "Arial", sans-serif;
+  --font-size-base: 16px;
+  --font-size-sm: 14px;
+  --font-size-lg: 18px;
+  --font-size-xl: 24px;
+  --font-size-xxl: 32px;
+  --font-size-huge: 48px;
+
+  /* 行高系统 */
+  --line-height-tight: 1.3;
+  --line-height-normal: 1.6;
+  --line-height-relaxed: 1.8;
+
+  /* 过渡效果 */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.3s ease;
+
+  /* 容器宽度 */
+  --container-max-width: 1200px;
+  --container-sm: 768px;
+}
+
+/* ===== 全局重置样式 ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-normal);
+  color: var(--primary-text);
+  background-color: var(--primary-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===== 通用排版 ===== */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  line-height: var(--line-height-tight);
+  margin-bottom: var(--spacing-md);
+}
+
+h1 {
+  font-size: var(--font-size-huge);
+}
+
+h2 {
+  font-size: var(--font-size-xxl);
+}
+
+h3 {
+  font-size: var(--font-size-xl);
+}
+
+p {
+  margin-bottom: var(--spacing-md);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--accent-color);
+}
+
+/* ===== 通用按钮样式 ===== */
+.btn {
+  display: inline-block;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  text-align: center;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  text-decoration: none;
+}
+
+.btn-primary {
+  background-color: var(--accent-color);
+  color: #FFFFFF;
+}
+
+.btn-primary:hover {
+  background-color: #0041CC;
+  color: #FFFFFF;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 82, 255, 0.3);
+}
+
+.btn-outline {
+  background-color: transparent;
+  border: 2px solid var(--accent-color);
+  color: var(--accent-color);
+}
+
+.btn-outline:hover {
+  background-color: var(--accent-color);
+  color: #FFFFFF;
+  transform: translateY(-2px);
+}
+
+.btn-text {
+  background-color: transparent;
+  color: var(--secondary-text);
+  padding: var(--spacing-xs) var(--spacing-sm);
+}
+
+.btn-text:hover {
+  color: var(--accent-color);
+  background-color: var(--hover-bg);
+}
+
+/* ===== 通用卡片样式 ===== */
+.card {
+  background-color: var(--primary-bg);
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  padding: var(--spacing-lg);
+  transition: all var(--transition-normal);
+}
+
+.card:hover {
+  border-color: var(--accent-color);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  transform: translateY(-4px);
+}
+
+.card-title {
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  color: var(--primary-text);
+  margin-bottom: var(--spacing-sm);
+}
+
+.card-description {
+  font-size: var(--font-size-base);
+  color: var(--secondary-text);
+  line-height: var(--line-height-relaxed);
+}
+
+/* ===== 导航栏样式 ===== */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: linear-gradient(135deg, #FFFFFF 0%, var(--blue-bg-light) 100%);
+  border-bottom: 2px solid var(--border-blue);
+  padding: var(--spacing-md) var(--spacing-lg);
+  box-shadow: 0 2px 8px rgba(0, 82, 255, 0.08);
+}
+
+.navbar-container {
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar-title {
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  color: var(--blue-text);
+}
+
+.navbar-back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  color: var(--blue-text);
+  font-size: var(--font-size-base);
+  transition: all var(--transition-fast);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: 6px;
+}
+
+.navbar-back:hover {
+  color: var(--accent-color);
+  background-color: var(--blue-bg-medium);
+}
+
+/* ===== 容器和布局 ===== */
+.container {
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: 0 var(--spacing-lg);
+}
+
+.container-sm {
+  max-width: var(--container-sm);
+  margin: 0 auto;
+  padding: 0 var(--spacing-lg);
+}
+
+.section {
+  padding: var(--spacing-xxl) 0;
+}
+
+/* ===== Logo样式 ===== */
+.logo {
+  display: block;
+  max-width: 200px;
+  height: auto;
+}
+
+/* ===== 响应式设计 ===== */
+@media (max-width: 768px) {
+  :root {
+    --font-size-huge: 32px;
+    --font-size-xxl: 24px;
+    --font-size-xl: 20px;
+    --spacing-xxl: 40px;
+    --spacing-xl: 32px;
+  }
+
+  .container,
+  .container-sm {
+    padding: 0 var(--spacing-md);
+  }
+
+  .section {
+    padding: var(--spacing-xl) 0;
+  }
+
+  .btn {
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: var(--font-size-sm);
+  }
+
+  .card {
+    padding: var(--spacing-md);
+  }
+
+  .navbar {
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+
+  .logo {
+    max-width: 150px;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --font-size-huge: 28px;
+    --font-size-xxl: 20px;
+    --font-size-xl: 18px;
+  }
+}
+
+/* ===== 工具类 ===== */
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.mt-xs { margin-top: var(--spacing-xs); }
+.mt-sm { margin-top: var(--spacing-sm); }
+.mt-md { margin-top: var(--spacing-md); }
+.mt-lg { margin-top: var(--spacing-lg); }
+.mt-xl { margin-top: var(--spacing-xl); }
+
+.mb-xs { margin-bottom: var(--spacing-xs); }
+.mb-sm { margin-bottom: var(--spacing-sm); }
+.mb-md { margin-bottom: var(--spacing-md); }
+.mb-lg { margin-bottom: var(--spacing-lg); }
+.mb-xl { margin-bottom: var(--spacing-xl); }
+
+.text-primary {
+  color: var(--primary-text);
+}
+
+.text-secondary {
+  color: var(--secondary-text);
+}
+
+.text-accent {
+  color: var(--accent-color);
+}

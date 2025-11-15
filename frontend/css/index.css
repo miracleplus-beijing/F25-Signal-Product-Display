@@ -1,0 +1,267 @@
+/* ===================================================================
+   首页专用样式 - index.html
+   实现垂直居中、极简设计、白底奇绩蓝点缀
+   =================================================================== */
+
+/* ===== 主容器 - 完美居中 ===== */
+.index-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: var(--spacing-xl) var(--spacing-lg);
+  gap: var(--spacing-xl);
+  background: linear-gradient(180deg, #FFFFFF 0%, #F8FBFF 100%);
+}
+
+/* ===== Logo区域 ===== */
+.logo-section {
+  text-align: center;
+  margin-bottom: var(--spacing-md);
+  padding: var(--spacing-md);
+  background-color: var(--blue-bg-light);
+  border-radius: 50%;
+  width: 280px;
+  height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.main-logo {
+  width: 220px;
+  height: auto;
+  display: block;
+}
+
+/* ===== Slogan区域 ===== */
+.slogan-section {
+  max-width: 800px;
+  text-align: center;
+  padding: var(--spacing-xl) var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+  background-color: var(--blue-bg-light);
+  border-radius: 16px;
+  border: 1px solid var(--border-blue);
+}
+
+.slogan-text {
+  font-size: var(--font-size-xxl);
+  font-weight: 500;
+  line-height: var(--line-height-relaxed);
+  color: var(--primary-text);
+  margin: 0;
+}
+
+/* ===== 双卡片区域 ===== */
+.cards-section {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-lg);
+  max-width: 900px;
+  width: 100%;
+  margin-bottom: var(--spacing-lg);
+}
+
+.index-card {
+  background: linear-gradient(135deg, #FFFFFF 0%, var(--blue-bg-light) 100%);
+  border: 2px solid var(--border-blue);
+  border-radius: 12px;
+  padding: var(--spacing-xl);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: all var(--transition-normal);
+  cursor: pointer;
+  min-height: 240px;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+
+.index-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent-color) 0%, var(--accent-light) 100%);
+  transform: scaleX(0);
+  transition: transform var(--transition-normal);
+}
+
+.index-card:hover::before {
+  transform: scaleX(1);
+}
+
+.index-card:hover {
+  border-color: var(--accent-color);
+  background: linear-gradient(135deg, var(--blue-bg-light) 0%, var(--blue-bg-medium) 100%);
+  box-shadow: 0 12px 32px rgba(0, 82, 255, 0.25);
+  transform: translateY(-6px);
+}
+
+.index-card-title {
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  color: var(--accent-color);
+  margin: 0 0 var(--spacing-md) 0;
+}
+
+.index-card-description {
+  font-size: var(--font-size-base);
+  color: var(--secondary-text);
+  line-height: var(--line-height-relaxed);
+  margin: 0 0 var(--spacing-lg) 0;
+  flex-grow: 1;
+}
+
+.index-card-action {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  color: var(--accent-color);
+  font-size: var(--font-size-base);
+  font-weight: 500;
+}
+
+.action-arrow {
+  font-size: var(--font-size-lg);
+  transition: transform var(--transition-normal);
+}
+
+.index-card:hover .action-arrow {
+  transform: translateX(4px);
+}
+
+/* ===== 资源展示区域 ===== */
+.resources-section {
+  text-align: center;
+  padding: var(--spacing-lg);
+  border-top: 2px solid var(--border-blue);
+  width: 100%;
+  max-width: 900px;
+  background-color: var(--blue-bg-light);
+  border-radius: 12px;
+}
+
+.resources-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+}
+
+.resource-item {
+  font-size: var(--font-size-sm);
+  color: var(--blue-text);
+  font-weight: 600;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  background-color: #FFFFFF;
+  border-radius: 6px;
+  border: 1px solid var(--border-blue);
+}
+
+.resource-divider {
+  color: var(--accent-light);
+  font-size: var(--font-size-sm);
+}
+
+/* ===== 响应式设计 - 移动端 ===== */
+@media (max-width: 768px) {
+  .index-container {
+    padding: var(--spacing-lg) var(--spacing-md);
+    gap: var(--spacing-lg);
+  }
+
+  .main-logo {
+    width: 160px;
+  }
+
+  .slogan-section {
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .slogan-text {
+    font-size: var(--font-size-xl);
+  }
+
+  .cards-section {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .index-card {
+    padding: var(--spacing-lg);
+    min-height: 200px;
+  }
+
+  .index-card-title {
+    font-size: var(--font-size-lg);
+  }
+
+  .index-card-description {
+    font-size: var(--font-size-sm);
+  }
+
+  .resources-container {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+
+  .resource-divider {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-logo {
+    width: 140px;
+  }
+
+  .slogan-text {
+    font-size: var(--font-size-lg);
+  }
+
+  .index-card {
+    padding: var(--spacing-md);
+    min-height: 180px;
+  }
+}
+
+/* ===== 微调动画效果 ===== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.logo-section,
+.slogan-section,
+.cards-section,
+.resources-section {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.slogan-section {
+  animation-delay: 0.1s;
+}
+
+.cards-section {
+  animation-delay: 0.2s;
+}
+
+.resources-section {
+  animation-delay: 0.3s;
+}
