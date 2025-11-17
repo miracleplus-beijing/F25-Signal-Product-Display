@@ -10,27 +10,27 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: var(--spacing-xl) var(--spacing-lg);
-  gap: var(--spacing-xl);
+  padding: var(--spacing-lg) var(--spacing-lg);
+  gap: var(--spacing-md);
   background: linear-gradient(180deg, #FFFFFF 0%, #F8FBFF 100%);
 }
 
 /* ===== Logo区域 ===== */
 .logo-section {
   text-align: center;
-  margin-bottom: var(--spacing-md);
-  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
+  padding: var(--spacing-sm);
   background-color: var(--blue-bg-light);
   border-radius: 50%;
-  width: 280px;
-  height: 280px;
+  width: 180px;
+  height: 180px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .main-logo {
-  width: 220px;
+  width: 140px;
   height: auto;
   display: block;
 }
@@ -39,17 +39,17 @@
 .slogan-section {
   max-width: 800px;
   text-align: center;
-  padding: var(--spacing-xl) var(--spacing-lg);
-  margin-bottom: var(--spacing-lg);
+  padding: var(--spacing-md) var(--spacing-lg);
+  margin-bottom: var(--spacing-md);
   background-color: var(--blue-bg-light);
   border-radius: 16px;
   border: 1px solid var(--border-blue);
 }
 
 .slogan-text {
-  font-size: var(--font-size-xxl);
+  font-size: var(--font-size-lg);
   font-weight: 500;
-  line-height: var(--line-height-relaxed);
+  line-height: var(--line-height-normal);
   color: var(--primary-text);
   margin: 0;
 }
@@ -61,21 +61,21 @@
   gap: var(--spacing-lg);
   max-width: 900px;
   width: 100%;
-  margin-bottom: var(--spacing-lg);
+  margin-bottom: var(--spacing-md);
 }
 
 .index-card {
   background: linear-gradient(135deg, #FFFFFF 0%, var(--blue-bg-light) 100%);
   border: 2px solid var(--border-blue);
   border-radius: 12px;
-  padding: var(--spacing-xl);
+  padding: var(--spacing-lg);
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   transition: all var(--transition-normal);
   cursor: pointer;
-  min-height: 240px;
+  min-height: 160px;
   justify-content: space-between;
   position: relative;
   overflow: hidden;
