@@ -1,0 +1,60 @@
+/* ============================================
+   语言切换器组件样式
+   ============================================ */
+
+.language-switcher {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: flex;
+    gap: 0;
+    background: #FFFFFF;
+    border: 1px solid #E0E0E0;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.language-switcher .lang-btn {
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 500;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: #555555;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.language-switcher .lang-btn + .lang-btn {
+    border-left: 1px solid #E0E0E0;
+}
+
+.language-switcher .lang-btn.active {
+    color: #0052FF;
+    background: #F5F8FF;
+}
+
+.language-switcher .lang-btn:hover {
+    background: #F8F8F8;
+}
+
+.language-switcher .lang-btn.active:hover {
+    background: #F5F8FF;
+}
+
+/* 响应式：移动端 */
+@media (max-width: 768px) {
+    .language-switcher {
+        top: 12px;
+        right: 12px;
+    }
+
+    .language-switcher .lang-btn {
+        padding: 5px 10px;
+        font-size: 13px;
+    }
+}

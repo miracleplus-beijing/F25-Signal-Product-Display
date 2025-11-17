@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initSmoothScrolling();
     initMobileOptimizations();
     initAnalytics();
+    initLanguageSwitcher();
 });
 
 /**
@@ -282,10 +283,66 @@ function debounce(func, wait) {
     };
 }
 
+/**
+ * 语言切换功能
+ * 支持中英文切换并记住用户偏好
+ */
+function initLanguageSwitcher() {
+    // 获取当前页面路径
+    const currentPath = window.location.pathname;
+    const currentPage = currentPath.split('/').pop();
+
+    // 检测当前语言（根据文件名）
+    const isEnglish = currentPage.includes('-en.html');
+
+    // 保存语言偏好到 localStorage
+    if (isEnglish) {
+        localStorage.setItem('preferredLanguage', 'en');
+    } else {
+        localStorage.setItem('preferredLanguage', 'zh');
+    }
+
+    // 为语言切换按钮添加点击事件（可选，因为已经是链接）
+    const langButtons = document.querySelectorAll('.language-switcher .lang-btn');
+
+    langButtons.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            const targetLang = this.textContent.trim();
+            const newLang = targetLang === 'EN' ? 'en' : 'zh';
+
+            // 保存新的语言偏好
+            localStorage.setItem('preferredLanguage', newLang);
+
+            console.log(`🌐 切换语言: ${newLang === 'zh' ? '中文' : 'English'}`);
+        });
+    });
+
+    // 检查是否需要根据用户偏好自动跳转
+    // 注意：这个功能是可选的，如果用户明确访问某个语言版本，我们不自动跳转
+    // 只在访问 index.html（不带语言后缀）时才考虑自动跳转
+}
+
+/**
+ * 获取当前页面对应的另一种语言版本的URL
+ * @param {string} currentPage - 当前页面文件名
+ * @param {boolean} toEnglish - 是否转为英文版本
+ * @returns {string} - 对应的另一种语言的页面URL
+ */
+function getOtherLanguageUrl(currentPage, toEnglish) {
+    if (toEnglish) {
+        // 中文转英文
+        return currentPage.replace('.html', '-en.html');
+    } else {
+        // 英文转中文
+        return currentPage.replace('-en.html', '.html');
+    }
+}
+
 // 导出函数（如果需要在其他脚本中使用）
 window.MiraclePlusSignal = {
     isMobile,
     throttle,
     debounce,
-    showComingSoonNotification
+    showComingSoonNotification,
+    getOtherLanguageUrl
 };
