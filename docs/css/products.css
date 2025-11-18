@@ -32,10 +32,22 @@
 /* 左侧区域 */
 .card-left {
   flex: 0 0 40%;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 16px;
   align-items: flex-start;
+}
+
+/* 标题和副标题占据整行 */
+.card-left .merged-title,
+.card-left .merged-subtitle,
+.card-left .merged-tag {
+  grid-column: 1 / -1;
+}
+
+/* 按钮占据单个网格 */
+.card-left .btn {
+  grid-column: span 1;
 }
 
 .merged-title {
@@ -79,11 +91,11 @@
 
 /* 按钮样式 */
 .merged-card .btn {
-  width: auto;
-  min-width: 200px;
-  padding: 12px 24px;
+  width: 100%;
+  min-width: auto;
+  padding: 12px 20px;
   border-radius: 8px;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 500;
   text-align: center;
   cursor: pointer;
@@ -377,6 +389,7 @@ svg.btn-icon {
   .card-left {
     flex: 0 0 100%;
     width: 100%;
+    grid-template-columns: 1fr;
   }
 
   .card-right {
