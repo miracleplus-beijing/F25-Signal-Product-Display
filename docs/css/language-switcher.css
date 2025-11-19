@@ -3,10 +3,8 @@
    ============================================ */
 
 .language-switcher {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 1000;
+    position: relative;
+    flex-shrink: 0;
     display: flex;
     gap: 0;
     background: #FFFFFF;
@@ -48,11 +46,6 @@
 
 /* 响应式：移动端 */
 @media (max-width: 768px) {
-    .language-switcher {
-        top: 12px;
-        right: 12px;
-    }
-
     .language-switcher .lang-btn {
         padding: 5px 10px;
         font-size: 13px;
