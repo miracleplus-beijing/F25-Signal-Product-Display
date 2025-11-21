@@ -108,7 +108,14 @@
                 <!-- 音频播放器 -->
                 <div class="audio-player-container">
                     <div class="audio-title">11.14 奇绩前沿信号音频</div>
-                    <audio controls class="audio-player">
+                    <button class="custom-play-button" id="customPlayButton">
+                        <span class="play-icon"></span>
+                        <span class="pause-icon">
+                            <span></span>
+                            <span></span>
+                        </span>
+                    </button>
+                    <audio controls class="audio-player" id="audioPlayer">
                         <source src="assets/audio/11.14奇绩前沿信号.mp3" type="audio/mpeg">
                         您的浏览器不支持 audio 元素。
                     </audio>

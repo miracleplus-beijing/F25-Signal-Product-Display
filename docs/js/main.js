@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initMobileOptimizations();
     initAnalytics();
     initLanguageSwitcher();
+    initAudioPlayer();
 });
 
 /**
@@ -336,6 +337,48 @@ function getOtherLanguageUrl(currentPage, toEnglish) {
         // 英文转中文
         return currentPage.replace('-en.html', '.html');
     }
+}
+
+/**
+ * 音频播放器控制
+ * 自定义播放/暂停按钮控制
+ */
+function initAudioPlayer() {
+    const customPlayButton = document.getElementById('customPlayButton');
+    const audioPlayer = document.getElementById('audioPlayer');
+
+    // 如果页面不存在音频播放器元素，直接返回
+    if (!customPlayButton || !audioPlayer) {
+        return;
+    }
+
+    // 播放/暂停按钮点击事件
+    customPlayButton.addEventListener('click', function() {
+        if (audioPlayer.paused) {
+            audioPlayer.play();
+            customPlayButton.classList.add('playing');
+        } else {
+            audioPlayer.pause();
+            customPlayButton.classList.remove('playing');
+        }
+    });
+
+    // 监听音频播放事件
+    audioPlayer.addEventListener('play', function() {
+        customPlayButton.classList.add('playing');
+    });
+
+    // 监听音频暂停事件
+    audioPlayer.addEventListener('pause', function() {
+        customPlayButton.classList.remove('playing');
+    });
+
+    // 监听音频结束事件
+    audioPlayer.addEventListener('ended', function() {
+        customPlayButton.classList.remove('playing');
+    });
+
+    console.log('🎵 音频播放器初始化完成');
 }
 
 // 导出函数（如果需要在其他脚本中使用）

@@ -69,7 +69,7 @@
 
 /* ===== Slogan区域 ===== */
 .slogan-section {
-  max-width: 800px;
+  max-width: 900px;
   text-align: center;
   padding: var(--spacing-md) var(--spacing-lg);
   margin-bottom: var(--spacing-md);
