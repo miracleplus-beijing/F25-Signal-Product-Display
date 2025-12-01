@@ -733,60 +733,36 @@ svg.btn-icon {
   /* 日报和周报作为重点产品可以有轻微强调 */
 }
 
-/* ===== 按钮悬停预览效果 ===== */
-.btn-with-preview {
-  position: relative;
-}
-
-.btn-with-preview::after {
-  content: '';
-  position: absolute;
-  left: 110%;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 400px;
-  height: 300px;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  border-radius: 8px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-  opacity: 0;
+/* ===== 图片预览Tooltip样式 (由JS动态控制) ===== */
+#preview-tooltip {
+  position: fixed;
+  display: none;
+  z-index: 10000;
   pointer-events: none;
-  transition: opacity 0.3s ease;
-  z-index: 1000;
-  border: 2px solid var(--accent-color);
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
 }
 
-.btn-with-preview:hover::after {
+#preview-tooltip.show {
   opacity: 1;
 }
 
-/* 为每个按钮设置特定的背景图片 */
-.btn-with-preview[data-preview="assets/images/奇绩前沿信号日报11.14.png"]::after {
-  background-image: url('../images/奇绩前沿信号日报11.14.png');
-}
-
-.btn-with-preview[data-preview="assets/images/奇绩前沿信号月报2025.10.png"]::after {
-  background-image: url('../images/奇绩前沿信号月报2025.10.png');
-}
-
-.btn-with-preview[data-preview="assets/images/奇绩前沿信号日报-小宇宙.png"]::after {
-  background-image: url('../images/奇绩前沿信号日报-小宇宙.png');
-}
-
-.btn-with-preview[data-preview="assets/images/奇绩前沿信号周报-小红书.png"]::after {
-  background-image: url('../images/奇绩前沿信号周报-小红书.png');
-}
-
-.btn-with-preview[data-preview="assets/images/奇绩前沿信号评测-最新国产模型体验.png"]::after {
-  background-image: url('../images/奇绩前沿信号评测-最新国产模型体验.png');
+#preview-tooltip img {
+  max-width: 400px;
+  max-height: 300px;
+  width: auto;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border: 2px solid var(--accent-color);
+  background-color: #FFFFFF;
+  object-fit: contain;
 }
 
 /* 移动端隐藏预览效果 */
 @media (max-width: 1024px) {
-  .btn-with-preview::after {
-    display: none;
+  #preview-tooltip {
+    display: none !important;
   }
 }
 

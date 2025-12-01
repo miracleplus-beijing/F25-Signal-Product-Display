@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initAnalytics();
     initLanguageSwitcher();
     initAudioPlayer();
+    initImagePreview();
 });
 
 /**
@@ -321,6 +322,96 @@ function initLanguageSwitcher() {
     // 检查是否需要根据用户偏好自动跳转
     // 注意：这个功能是可选的，如果用户明确访问某个语言版本，我们不自动跳转
     // 只在访问 index.html（不带语言后缀）时才考虑自动跳转
+}
+
+/**
+ * 修复后的图片预览功能
+ * 使用 JS 动态创建悬浮窗，解决 CSS 路径和 z-index 问题
+ */
+function initImagePreview() {
+    // 1. 创建预览容器（如果不存在）
+    let tooltip = document.getElementById('preview-tooltip');
+    if (!tooltip) {
+        tooltip = document.createElement('div');
+        tooltip.id = 'preview-tooltip';
+        // 创建内部图片元素
+        const img = document.createElement('img');
+        tooltip.appendChild(img);
+        document.body.appendChild(tooltip);
+    }
+
+    const tooltipImg = tooltip.querySelector('img');
+    const buttons = document.querySelectorAll('.btn-with-preview');
+
+    buttons.forEach(btn => {
+        // 鼠标移入
+        btn.addEventListener('mouseenter', function(e) {
+            const imagePath = this.getAttribute('data-preview');
+            if (imagePath) {
+                // 图片路径处理：确保正确的相对路径
+                tooltipImg.src = imagePath;
+                tooltip.style.display = 'block';
+
+                // 添加淡入动画类
+                requestAnimationFrame(() => {
+                    tooltip.classList.add('show');
+                });
+            }
+        });
+
+        // 鼠标移动（跟随）
+        btn.addEventListener('mousemove', function(e) {
+            // 获取鼠标位置
+            const mouseX = e.clientX;
+            const mouseY = e.clientY;
+
+            // 获取tooltip实际尺寸
+            const tooltipRect = tooltip.getBoundingClientRect();
+            const tooltipWidth = tooltipRect.width || 400;
+            const tooltipHeight = tooltipRect.height || 300;
+
+            // 设置偏移量
+            const offsetX = 20;
+            const offsetY = 20;
+
+            // 计算初始位置（鼠标右下方）
+            let left = mouseX + offsetX;
+            let top = mouseY + offsetY;
+
+            // 边界检测：防止溢出右侧
+            if (left + tooltipWidth > window.innerWidth) {
+                left = mouseX - tooltipWidth - offsetX;
+            }
+
+            // 边界检测：防止溢出底部
+            if (top + tooltipHeight > window.innerHeight) {
+                top = mouseY - tooltipHeight - offsetY;
+            }
+
+            // 边界检测：防止溢出左侧
+            if (left < 0) {
+                left = offsetX;
+            }
+
+            // 边界检测：防止溢出顶部
+            if (top < 0) {
+                top = offsetY;
+            }
+
+            // 应用位置
+            tooltip.style.left = left + 'px';
+            tooltip.style.top = top + 'px';
+        });
+
+        // 鼠标移出
+        btn.addEventListener('mouseleave', function() {
+            tooltip.classList.remove('show');
+            // 延迟隐藏，等待淡出动画完成
+            setTimeout(() => {
+                tooltip.style.display = 'none';
+            }, 200);
+        });
+    });
 }
 
 /**

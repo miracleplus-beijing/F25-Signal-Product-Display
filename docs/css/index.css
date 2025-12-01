@@ -333,3 +333,73 @@
 .resources-section {
   animation-delay: 0.3s;
 }
+
+/* ===================================================================
+   Dieter Rams 风格重构 - 主样式文件
+   关键词：秩序、克制、几何、功能主义
+   =================================================================== */
+
+:root {
+  /* 颜色系统 - Rams 风格 */
+  --primary-bg: #F4F4F4;          /* 经典的 Braun 设备灰白背景 */
+  --surface-bg: #FFFFFF;          /* 内容区纯白 */
+  --primary-text: #000000;        /* 纯黑，高对比度 */
+  --secondary-text: #666666;      /* 中灰 */
+  
+  /* 奇绩品牌色保留 */
+  --accent-color: #0052FF;
+  --accent-dark: #0033CC;
+  --border-color: #D0D0D0;        /* 更有质感的边框灰 */
+
+  /* 间距系统 - 更加宽松的呼吸感 */
+  --spacing-xs: 8px;
+  --spacing-sm: 16px;
+  --spacing-md: 24px;
+  --spacing-lg: 32px;
+  --spacing-xl: 48px;
+  --spacing-xxl: 80px;
+
+  /* 几何特征 */
+  --radius-sm: 2px;               /* 极小的圆角，甚至直角 */
+  --radius-md: 4px;
+  --stroke-width: 1px;            /* 精细的线条 */
+}
+
+body {
+  background-color: var(--primary-bg);
+  color: var(--primary-text);
+  font-family: "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif; /* 强调 Helvetica */
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 导航栏 - 极简通栏 */
+.navbar {
+  background: var(--surface-bg);
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: none; /* 去除阴影 */
+}
+
+/* 按钮 - 实体感强，无渐变 */
+.btn {
+  border-radius: var(--radius-md);
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  transition: all 0.2s ease;
+}
+
+.btn-primary {
+  background-color: var(--accent-color);
+  border: 1px solid var(--accent-color);
+}
+
+.btn-secondary {
+  border: 1px solid var(--border-color); /* 灰色边框 */
+  color: var(--primary-text);
+}
+
+.btn-secondary:hover {
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+  background: transparent;
+  transform: none; /* 去除位移，保持稳重 */
+}
