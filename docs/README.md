@@ -1,8 +1,8 @@
-# 奇绩前沿信号 - 静态网站
+# 奇绩信号 - 静态网站
 
 ## 项目简介
 
-奇绩前沿信号静态网站，用于展示研究体系和产品矩阵。
+奇绩信号静态网站，用于展示研究体系和产品矩阵。
 
 ## 文件结构
 
@@ -63,7 +63,7 @@ npx http-server -p 8000
    cd miracleplus-signal.github.io
    cp -r ../F25-Signal-Display/frontend/* .
    git add .
-   git commit -m "初始化奇绩前沿信号网站"
+   git commit -m "初始化奇绩信号网站"
    git push
    ```
 

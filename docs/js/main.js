@@ -1,11 +1,11 @@
 /*
- * 奇绩前沿信号 - 主交互脚本
+ * 奇绩信号 - 主交互脚本
  * 提供基础交互功能：占位链接提示、平滑滚动、移动端优化
  */
 
 // DOM 加载完成后执行
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('🚀 奇绩前沿信号网站加载完成');
+    console.log('🚀 奇绩信号网站加载完成');
 
     // 初始化所有功能
     initComingSoonNotification();
